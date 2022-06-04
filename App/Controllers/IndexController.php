@@ -23,10 +23,6 @@ class IndexController extends Action
 	public function registrar()
 	{
 
-		echo '<pre>';
-		print_r($_POST);
-		echo '</pre>';
-
 		//receber dados do form
 
 		//sucesso
