@@ -18,7 +18,14 @@ class AuthController extends Action {
         $usuario->autenticar();
 
         if($usuario->__get('id') != '' && $usuario->__get('nome') != '') {
-            echo 'Autenticado';
+            
+            session_start();
+
+            $_SESSION['id'] = $usuario->__get('id');
+            $_SESSION['nome'] = $usuario->__get('nome');
+
+            header('Location: /timeline');
+
         } else {
             header('Location: /?login=erro');
         }
