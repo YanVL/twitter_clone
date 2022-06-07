@@ -83,7 +83,7 @@ class Usuario extends Model
 
         $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        if($usuario['id'] != '' && $usuario['nome'] != '') {
+        if(!empty($usuario['id']) && !empty($usuario['nome'])) {
             $this->__set('id', $usuario['id']);
             $this->__set('nome', $usuario['nome']);
         }

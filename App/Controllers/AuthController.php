@@ -17,7 +17,7 @@ class AuthController extends Action {
 
         $usuario->autenticar();
 
-        if(!empty($usuario->__get('id')) && !empty($usuario->__get('nome'))) {
+        if($usuario->__get('id') != '' && $usuario->__get('nome') != '') {
             echo 'Autenticado';
         } else {
             echo 'Erro ao fazer login';
