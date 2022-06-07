@@ -15,7 +15,7 @@ class AppController extends Action {
         if($_SESSION['id'] != '' && $_SESSION['nome'] != '')  {
             $this->render('timeline');
         } else {
-            header('Location: /?login=erro');
+            header('Location: /');
         }
     }
 }
