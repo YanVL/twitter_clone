@@ -23,7 +23,8 @@ class Usuario extends Model
     }
 
     //salvar
-    public function salvar() {
+    public function salvar()
+    {
         $query = "insert into usuarios(nome, email, senha)values(:nome, :email, :senha)";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':nome', $this->__get('nome'));
@@ -35,18 +36,19 @@ class Usuario extends Model
     }
 
     //validar se cadastro pode ser feito
-    public function validarCadastro() {
+    public function validarCadastro()
+    {
         $valido = true;
 
-        if(strlen($this->__get('nome')) < 3) {
+        if (strlen($this->__get('nome')) < 3) {
             $valido = false;
         }
 
-        if(strlen($this->__get('email')) < 3) {
+        if (strlen($this->__get('email')) < 3) {
             $valido = false;
         }
 
-        if(strlen($this->__get('senha')) < 3) {
+        if (strlen($this->__get('senha')) < 3) {
             $valido = false;
         }
 
@@ -54,7 +56,8 @@ class Usuario extends Model
     }
 
     //recupear um usuario por email
-    public function getUsuarioPorEmail() {
+    public function getUsuarioPorEmail()
+    {
         $query = "select nome, email from usuarios where email = :email";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':email', $this->__get('email'));
@@ -63,4 +66,28 @@ class Usuario extends Model
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function autenticar()
+    {
+        $query = "select
+                    id, nome, email
+                  from 
+                    usuarios
+                  where
+                    email = :email 
+                  and
+                    senha = :senha";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':email', $this->__get('email'));
+        $stmt->bindValue(':senha', $this->__get('senha'));
+        $stmt->execute();
+
+        $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if($usuario['id'] != '' && $usuario['nome'] != '') {
+            $this->__set('id', $usuario['id']);
+            $this->__set('nome', $usuario['nome']);
+        }
+
+        return $this;
+    }
 }
