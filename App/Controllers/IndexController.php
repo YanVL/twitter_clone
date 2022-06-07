@@ -33,12 +33,15 @@ class IndexController extends Action
 	{
 
 		//receber dados do form
-
 		$usuario = Container::getModel('Usuario');
 
 		$usuario->__set('nome', $_POST['nome']);
 		$usuario->__set('email', $_POST['email']);
-		$usuario->__set('senha', md5($_POST['senha']));
+		
+		//verifica requisitos da senha do cadastro
+		if(isset($_POST['senha']) && strlen($_POST['senha']) > 3){
+            $usuario->__set('senha', md5($_POST['senha'])); 
+        }
 
 		if ($usuario->validarCadastro() && count($usuario->getUsuarioPorEmail()) == 0) {
 
