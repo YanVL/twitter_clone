@@ -11,6 +11,8 @@ class IndexController extends Action
 
 	public function index()
 	{
+		//verifica os parametros de login para tratativas
+		$this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
 		$this->render('index');
 	}
 
