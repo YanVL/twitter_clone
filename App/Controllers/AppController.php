@@ -28,10 +28,13 @@ class AppController extends Action
 
         if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
 
-            echo '<pre>';
-            print_r($_POST);
-            echo '</pre>';
-            
+            $tweet = Container::getModel('Tweet');
+
+            $tweet->__set('tweet', $_POST['tweet']);
+            $tweet->__set('id_usuario', $_SESSION['id']);
+
+            $tweet->salvar();
+
         } else {
             header('Location: /');
         }
