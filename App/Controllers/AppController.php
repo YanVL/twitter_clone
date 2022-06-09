@@ -15,6 +15,18 @@ class AppController extends Action
         session_start();
 
         if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
+
+            //recuperar tweets
+            $tweet = Container::getModel('Tweet');
+
+            $tweet->__set('id_usuario', $_SESSION['id']);
+
+            $tweets = $tweet->getAll();
+
+            echo '<pre>';
+            print_r($tweets);
+            echo '</pre>';
+
             $this->render('timeline');
         } else {
             header('Location: /');
@@ -34,6 +46,8 @@ class AppController extends Action
             $tweet->__set('id_usuario', $_SESSION['id']);
 
             $tweet->salvar();
+
+            header('Location: /timeline');
 
         } else {
             header('Location: /');

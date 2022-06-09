@@ -34,4 +34,15 @@ class Tweet extends Model
     }
 
     //recuperar
+    public function getAll() {
+        $query = "
+            select id, id_usuario, tweet, data from tweets where id_usuario = :id_usuario
+        ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
