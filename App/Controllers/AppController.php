@@ -87,8 +87,10 @@ class AppController extends Action
 
        } else if ($acao == 'deixar_de_seguir') {
         $usuario->deixarSeguirUsuario($id_usuario_seguindo);
-        
+
        }
+
+       header('Location: /quem_seguir');
     }
 
 }
