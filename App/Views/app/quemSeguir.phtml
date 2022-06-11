@@ -57,24 +57,24 @@
 
 		<div class="col-md-6">
 
-				<div class="row mb-2">
-					<div class="col">
-						<div class="card">
-							<div class="card-body">
-								<form method="get" action="/quem_seguir">
-									<div class="input-group mb-3">
-										<input type="text" name="pesquisarPor" class="form-control" placeholder="Quem você está procurando?">
-										<div class="input-group-append">
-											<button class="btn btn-primary" type="submit">Procurar</button>
-										</div>
+			<div class="row mb-2">
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+							<form method="get" action="/quem_seguir">
+								<div class="input-group mb-3">
+									<input type="text" name="pesquisarPor" class="form-control" placeholder="Quem você está procurando?">
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="submit">Procurar</button>
 									</div>
-								</form>
-							</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
+			</div>
 
-			<?php foreach($this->view->usuarios as $indice_arr => $usuario) { ?>
+			<?php foreach ($this->view->usuarios as $indice_arr => $usuario) { ?>
 				<div class="row mb-2">
 					<div class="col">
 						<div class="card">
@@ -86,8 +86,10 @@
 
 									<div class="col-md-6 d-flex justify-content-end">
 										<div>
-											<a href="#" class="btn btn-success">Seguir</a>
-											<a href="#" class="btn btn-danger">Deixar de seguir</a>
+											<a href="/acao?acao=seguir&id_usuario=<?= $usuario['id'] ?>" 
+											class="btn btn-success">Seguir</a>
+											<a href="/acao?acao=deixar_de_seguir&id_usuario=<?= $usuario['id'] ?>" 
+											class="btn btn-danger">Deixar de seguir</a>
 										</div>
 									</div>
 								</div>

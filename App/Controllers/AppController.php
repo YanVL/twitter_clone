@@ -72,4 +72,13 @@ class AppController extends Action
         $this->render('quemSeguir');
     }
 
+    public function acao()
+    {
+        $this->validaAutenticacao();
+
+       echo '<pre>';
+       print_r($_GET);
+       echo '</pre>';
+    }
+
 }
