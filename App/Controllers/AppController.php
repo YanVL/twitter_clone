@@ -48,4 +48,17 @@ class AppController extends Action
             header('Location: /?login=erro');
         }
     }
+
+    public function quem_seguir()
+    {
+        $this->validaAutenticacao();
+
+        echo '<br><br><br><br><br><br><br>';
+        echo '<pre>';
+        print_r($_GET);
+        echo '</pre>';
+
+        $this->render('quemSeguir');
+    }
+
 }
