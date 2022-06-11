@@ -54,9 +54,20 @@ class AppController extends Action
         $this->validaAutenticacao();
 
         echo '<br><br><br><br><br><br><br>';
-        echo '<pre>';
-        print_r($_GET);
-        echo '</pre>';
+        $pesquisarPor = isset($_GET['pesquisarPor']) ? $_GET['pesquisarPor'] : '';
+
+        echo 'Pesquisando por: '.$pesquisarPor;
+
+        $usuarios = array();
+
+        if($pesquisarPor != '') {
+
+            $usuario = Container::getModel('Usuario');
+            $usuario->__set('nome', $pesquisarPor);
+            $usuarios = $usuario->getAll();
+        }
+
+        $this->view->usuarios = $usuarios;
 
         $this->render('quemSeguir');
     }
