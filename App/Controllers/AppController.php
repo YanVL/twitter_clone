@@ -53,7 +53,6 @@ class AppController extends Action
     {
         $this->validaAutenticacao();
 
-        echo '<br><br><br><br><br><br><br>';
         $pesquisarPor = isset($_GET['pesquisarPor']) ? $_GET['pesquisarPor'] : '';
 
         echo 'Pesquisando por: '.$pesquisarPor;
@@ -64,6 +63,7 @@ class AppController extends Action
 
             $usuario = Container::getModel('Usuario');
             $usuario->__set('nome', $pesquisarPor);
+            $usuario->__set('id', $_SESSION['id']);
             $usuarios = $usuario->getAll();
         }
 

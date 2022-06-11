@@ -97,9 +97,10 @@ class Usuario extends Model
                 from 
                     usuarios 
                 where 
-                    nome like :nome";
+                    nome like :nome and id != :id_usuario";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':nome', '%'.$this->__get('nome').'%');
+        $stmt->bindValue(':id_usuario', $this->__get('id'));
         $stmt->execute();     
         
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
