@@ -22,7 +22,8 @@ class Tweet extends Model
     }
 
     //salvar
-    public function salvar() {
+    public function salvar()
+    {
 
         $query = "insert into tweets(id_usuario, tweet)values(:id_usuario, :tweet)";
         $stmt = $this->db->prepare($query);
@@ -34,7 +35,8 @@ class Tweet extends Model
     }
 
     //recuperar
-    public function getAll() {
+    public function getAll()
+    {
         $query = "
             select 
                 t.id, 
@@ -58,5 +60,14 @@ class Tweet extends Model
         $stmt->execute();
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function remover()
+    {
+        $query = "delete from tweets where id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id', $this->__get('id'));
+        $stmt->execute();
+        return true;
     }
 }
